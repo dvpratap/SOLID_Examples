@@ -2,25 +2,19 @@
 import java.util.Scanner;
 
 public class Main {
-    public static int test_mode;
+    public static String test_mode;
     public static void main(String[] args) throws Exception {
-        Scanner input = new Scanner(System.in);
+
         int choice=0;
-        do {
-            System.out.println("\t ## Enter Run Mode: \n\t 1. Run Game \n\t 2. Run Test Suit");
-            String mode = input.nextLine();
-            if (mode.equals("1")) {
-                test_mode = 0;
-                choice=1;
-            } else if (mode.equals("2")) {
-                test_mode = 1;
-                choice=1;
-            }
-            else {
-                System.out.println("----Enter Correct Choice----");
-            }
-        }while(choice==0);
-        if (test_mode == 0) {
+	if(args.length > 0)
+        	test_mode = args[0];
+	else{
+		System.out.println("Test Not Entered, so running Game :\n");
+		test_mode = "Dummy";
+	}	
+        if(!(test_mode.equalsIgnoreCase("Test")))
+        {
+            Scanner input = new Scanner(System.in);
             Game game1 = new Game();
             Player p1 = new Player();
             game1.gameFirstDisplay();
@@ -77,7 +71,8 @@ public class Main {
             if(game_res ==1)
                 game1.displayKingOfDungeon();
         }
-        else{
+        else
+        {
             System.out.println("\t Running All test Cases :");
             MainTest m1 = new MainTest();
             m1.runAllTestCases();
