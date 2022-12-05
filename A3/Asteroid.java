@@ -22,7 +22,7 @@ public class Asteroid extends BoardComponent implements IObserver
 			// observer to tell it that it impacted the ground in the square it belongs
 			// to.
 			// <-- Send event to observer.
-			AsteroidImpacts.Instance().notifyObservers();
+			Subject.Instance().notifyObservers((Square)parent);
 			// It should then remove itself from its parent, it no longer exists in the
 			// hierarchy and should not receive any more operations.
 			parent.Remove(this);		
@@ -42,7 +42,12 @@ public class Asteroid extends BoardComponent implements IObserver
 	}
 
 	@Override
-	public void update() {
+	public void buildingDamage() {
+		// for buildings
+	}
+
+	@Override
+	public void update(Square square) {
 		// do nothing
 	}
 

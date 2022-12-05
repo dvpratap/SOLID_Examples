@@ -7,6 +7,7 @@ public interface IAsteroidGameFactory
 	public BoardComponent MakeSquare();
 	public BoardComponent MakeBuilding();
 	public Asteroid MakeAsteroid(int height);
+	public Shield MakeShield();
 	public ArrayList<ArrayList<BoardComponent>> MakeBoard(int height, int width);
 	public Command MakeCommand(String commandLine);
 }

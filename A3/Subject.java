@@ -1,23 +1,34 @@
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public abstract class Subject {
+public class Subject implements ISubject{
     private List<IObserver> observers;
-    //private Map<String, Object> keyValuePairs;
-
-    public Subject(){
-        observers = new ArrayList<IObserver>();
-        //keyValuePairs = new HashMap<>();
+    private static Subject uniqueInstance = null;
+    private Subject(){
+        observers = new CopyOnWriteArrayList<IObserver>();
     }
-    public void attach(IObserver observer){
+    public static Subject Instance(){
+        if(null == uniqueInstance){
+            uniqueInstance = new Subject();
+        }
+        return uniqueInstance;
+    }
+    @Override
+    public void attach(IObserver observer) {
         observers.add(observer);
     }
-    public void detach(IObserver observer){
+
+    @Override
+    public void detach(IObserver observer) {
         observers.remove(observer);
     }
-    public void  notifyObservers(){
+
+    @Override
+    public void notifyObservers(Square square) {
         for(Iterator<IObserver> itr = observers.iterator(); itr.hasNext();)
-        {//ListIterator<IObserver> itr = observers.listIterator();
-            itr.next().update();
+        {
+            itr.next().update(square);
         }
     }
 }

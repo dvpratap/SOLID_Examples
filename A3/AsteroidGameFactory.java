@@ -23,6 +23,12 @@ public class AsteroidGameFactory implements IAsteroidGameFactory
 		Asteroid asteroid = new Asteroid(height);
 		return asteroid;
 	}
+	@Override
+	public Shield MakeShield()
+	{
+		Shield shield = new Shield(new Square());
+		return shield;
+	}
 	
 	@Override
 	public ArrayList<ArrayList<BoardComponent>> MakeBoard(int height, int width)

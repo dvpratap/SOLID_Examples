@@ -14,10 +14,10 @@ public class SpawnBuildingCommand extends Command{
         //int height = Integer.parseInt(args[2]);
         IAsteroidGameFactory factory = GameBoard.Instance().GetFactory();
         System.out.println("Spawning Building at (" + args[0] + "," + args[1] +")");
-        Building building = (Building) factory.MakeBuilding();
-        square.Add(building);
+        square.Add(factory.MakeBuilding());
         GameBoard.Instance().IncrementBuildingCount();
-        AsteroidImpacts.Instance().attach(building);
+        //AsteroidImpacts.Instance().attach(building);
+        Subject.Instance().attach(square);
     }
 }
 

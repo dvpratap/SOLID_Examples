@@ -17,12 +17,16 @@ public class Shield extends BaseDecorator implements IObserver{
     }
 
     @Override
-    public void update() {
-        shieldHealth-=1;
-        if(0 == shieldHealth) {
-            System.out.println("Shield health  0, hence removed");
-            super.Remove(this);
-            super.Add(square);
+    public void update(Square square) {
+        if(super.equals(square)) {
+            shieldHealth -= 1;
+            if (0 == shieldHealth) {
+                System.out.println("Shield health  0, hence removed");
+                Subject.Instance().detach(this);
+                super.Remove(this);
+                System.out.println("Adding square back");
+                super.Add(square);
+            }
         }
     }
 }

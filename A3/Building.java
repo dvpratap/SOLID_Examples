@@ -1,6 +1,6 @@
 // Building is the leaf node for the composite pattern, Square's can have MULTIPLE Buildings
 // Buildings cannot have children.
-public class Building extends BoardComponent implements IObserver
+public class Building extends BoardComponent
 {
 	private int buildingHealth;
 	public Building()
@@ -12,7 +12,6 @@ public class Building extends BoardComponent implements IObserver
 	@Override
 	public void Operation()
 	{
-
 		// Buildings just stand there, they don't do anything.
 	}
 
@@ -29,14 +28,12 @@ public class Building extends BoardComponent implements IObserver
 	}
 
 	@Override
-	public void update() {
+	public void buildingDamage() {
 		buildingHealth-=1;
 		if(0 == buildingHealth){
-			System.out.println("Building Health 0, hence removed,");
+			System.out.println("Building Health 0, hence removed");
 			parent.Remove(this);
-			int buildingCount = GameBoard.Instance().GetBuildingCount();
 			GameBoard.Instance().DecrementBuildingCount();
-			System.out.println("BuildingCount: "+buildingCount);
 		}
 	}
 }

@@ -1,14 +1,16 @@
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 // Square is a composite, making up the Composite pattern (contains components)
-public class Square extends BoardComponent
+public class Square extends BoardComponent implements IObserver
 {
-	private final ArrayList<BoardComponent> children;
+	private final CopyOnWriteArrayList<BoardComponent> children;
 	private BoardComponent parent;
 	public Square()
 	{
 		super();
-		children = new ArrayList<BoardComponent>();
+		children = new CopyOnWriteArrayList<BoardComponent>();
 	}
 
 	@Override
@@ -35,4 +37,19 @@ public class Square extends BoardComponent
 	{
 		children.remove(child);
 	}
+
+	@Override
+	public void buildingDamage() {
+		// for buildings
+	}
+
+	@Override
+	public void update(Square square) {
+			if(this.equals(square)){
+				for (Iterator<BoardComponent> itr = children.iterator(); itr.hasNext(); ){
+					itr.next().buildingDamage();
+				}
+			}
+	}
+
 }

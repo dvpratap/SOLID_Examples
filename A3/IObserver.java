@@ -1,4 +1,4 @@
 public interface IObserver{
-    public void update();
+    public void update(Square square);
 
 }
